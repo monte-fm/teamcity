@@ -18,18 +18,21 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
 RUN sudo apt-get  install -y mysql-server mysql-client
+RUN service mysql start
+RUN mysqladmin -uroot -proot create teamcity
 
 #install dependencies
 RUN apt-get update
 RUN apt-get install -y default-jre default-jdk
-RUN apt-get install -y wget nano vim nginx
+RUN apt-get install -y wget nano vim
+#RUN apt-get install -y nginx
 RUN wget http://download.jetbrains.com/teamcity/TeamCity-9.0.3.tar.gz
 RUN tar -xvzf TeamCity-9.0.3.tar.gz
 RUN mv TeamCity /opt
 
 #Copying configs
 COPY configs/autostart.sh /root/autostart.sh
-COPY configs/nginx/default /etc/nginx/sites-available/default
+#COPY configs/nginx/default /etc/nginx/sites-available/default
 COPY configs/bash.bashrc /etc/bash.bashrc
 RUN chmod +x /root/autostart.sh
 RUN chmod +x /opt/TeamCity/bin/runAll.sh
@@ -38,4 +41,4 @@ RUN chmod +x /opt/TeamCity/bin/runAll.sh
 RUN alias ll='ls -la'
 
 #open ports
-EXPOSE 80 22 9090
+EXPOSE 8111 22
