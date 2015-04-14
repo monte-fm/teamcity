@@ -2,7 +2,9 @@ FROM      ubuntu:14.04.2
 MAINTAINER Olexander Kutsenko <olexander.kutsenko@gmail.com>
 
 # SSH service
-RUN sudo apt-get install -y openssh-server openssh-client python-software-properties
+RUN apt-get install -y openssh-server openssh-client
+RUN apt-get update
+RUN apt-get install -y python-software-properties
 RUN sudo mkdir /var/run/sshd
 RUN echo 'root:root' | chpasswd
 #change 'pass' to your secret password
