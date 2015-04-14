@@ -44,7 +44,9 @@ RUN chmod +x /root/.BuildServer/lib/jdbc/mysql-connector-java-5.1.35-bin.jar
 
 #Create database
 COPY configs/create_database.sh /root/
+COPY configs/start.sh /root/
 RUN chmod +x /root/create_database.sh
+RUN chmod +x /root/start.sh
 CMD [/root/create_database.sh]
 
 #open ports
