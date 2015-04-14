@@ -13,6 +13,7 @@ ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
 #install dependencies
+RUN apt-get update
 RUN apt-get install -y default-jre default-jdk
 RUN apt-get install -y wget nano vim nginx
 RUN wget http://download.jetbrains.com/teamcity/TeamCity-9.0.3.tar.gz
