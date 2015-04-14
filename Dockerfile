@@ -18,8 +18,6 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
 RUN sudo apt-get  install -y mysql-server mysql-client
-RUN service mysql start
-RUN mysqladmin -uroot -proot create teamcity
 
 #install dependencies
 RUN apt-get update
@@ -32,7 +30,6 @@ RUN mv TeamCity /opt
 
 #Copying configs
 COPY configs/autostart.sh /root/autostart.sh
-#COPY configs/nginx/default /etc/nginx/sites-available/default
 COPY configs/bash.bashrc /etc/bash.bashrc
 RUN chmod +x /root/autostart.sh
 RUN chmod +x /opt/TeamCity/bin/runAll.sh
@@ -44,5 +41,12 @@ RUN alias ll='ls -la'
 RUN mkdir -p /root/.BuildServer/lib/jdbc
 COPY configs/mysql-connector-java-5.1.35-bin.jar /root/.BuildServer/lib/jdbc/
 RUN chmod +x /root/.BuildServer/lib/jdbc/mysql-connector-java-5.1.35-bin.jar
+
+#Create database
+COPY configs/create_database.sh /root/
+RUN chmod +x /root/create_database.sh
+CMD [/root/create_database.sh]
+
 #open ports
 EXPOSE 8111 22
+
