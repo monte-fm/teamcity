@@ -5,5 +5,5 @@ cd /root/
 ./create_database.sh
 cd /opt/TeamCity/bin/
 ./runAll.sh start
-mv /root/start /root/autostart.sh
+mv /root/start.sh /root/autostart.sh
 
