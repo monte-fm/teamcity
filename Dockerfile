@@ -40,5 +40,9 @@ RUN chmod +x /opt/TeamCity/bin/runAll.sh
 #aliases
 RUN alias ll='ls -la'
 
+#MySQL driver
+RUN mkdir -p /root/.BuildServer/lib/jdbc
+COPY configs/mysql-connector-java-5.1.35-bin.jar /root/.BuildServer/lib/jdbc/
+RUN chmod +x /root/.BuildServer/lib/jdbc/mysql-connector-java-5.1.35-bin.jar
 #open ports
 EXPOSE 8111 22
