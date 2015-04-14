@@ -14,6 +14,11 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
+#MySQL install + password
+RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
+RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
+RUN sudo apt-get  install -y mysql-server mysql-client
+
 #install dependencies
 RUN apt-get update
 RUN apt-get install -y default-jre default-jdk
