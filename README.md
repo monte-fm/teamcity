@@ -1,10 +1,11 @@
 #Create container
 ```
-docker run -i -t -d -p 80:80 -p 22:22 cristo/teamcity /bin/bash
+docker run -i -t -d -p 8111:8111 -p 22:22 cristo/teamcity /bin/bash
 ```
 
 #MySQL
 ```
+DB_name: teamcity
 user: root 
 password: root
 
@@ -27,7 +28,7 @@ server {
                                 proxy_set_header Host $host;
                                 proxy_set_header X-Real_IP $remote_addr;
                                 proxy_cache off;
-                                proxy_pass http://localhost:80;
+                                proxy_pass http://localhost:8111;
                         }
 }
 ```
