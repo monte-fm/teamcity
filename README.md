@@ -31,3 +31,8 @@ server {
                         }
 }
 ```
+
+#WARNING!
+Agent connection error log in this server version 9.0.3
+
+#[bug tracker] (https://youtrack.jetbrains.com/issue/TW-39784)
