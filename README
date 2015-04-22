@@ -1,2 +1,0 @@
-#start
-docker run -i -t -d --name=teamcity -p 80:80 -p 22:22 -p 9090:9090  cristo/teamcity /bin/bash
