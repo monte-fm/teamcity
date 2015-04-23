@@ -34,7 +34,7 @@ server {
 ```
 
 #TeamCity like service
-Added service teamcity with 2 parrameters ({start|stop}):
+Added service teamcity with 2 parameters ({start|stop}):
 ```
 service teamcity start
 ```
