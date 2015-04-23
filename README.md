@@ -38,3 +38,12 @@ If you want disable user reginstration from web (security fix) - you need to run
 ```
 cd /root && ./web-registration-off.sh
 ```
+
+After if you want to enable user registration from web:
+```
+cd /root && ./web-registration-on.sh
+```
+
+Do not forget to restart TeamCity Server after security fix
+
+
