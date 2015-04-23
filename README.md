@@ -34,6 +34,6 @@ server {
 ```
 
 #WARNING!
-Agent connection error log in this server version 9.0.3
+Agent connection error login TeamCity Server version 9.0.3
 
 #[bug tracker] (https://youtrack.jetbrains.com/issue/TW-39784)
