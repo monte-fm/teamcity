@@ -33,6 +33,7 @@ COPY configs/start.sh /root/start.sh
 COPY configs/autostart.sh /root/autostart.sh
 COPY configs/bash.bashrc /etc/bash.bashrc
 COPY configs/web-registration-off.sh /root/web-registration-off.sh
+COPY configs/login.jsp /root/login.jsp
 RUN chmod +x /root/autostart.sh /root/web-registration-off.sh
 RUN chmod +x /opt/TeamCity/bin/runAll.sh /root/start.sh
 
