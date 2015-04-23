@@ -29,10 +29,12 @@ RUN tar -xvzf TeamCity-9.0.4.tar.gz
 RUN mv TeamCity /opt
 
 #Copying configs
+COPY configs/start.sh /root/start.sh
 COPY configs/autostart.sh /root/autostart.sh
 COPY configs/bash.bashrc /etc/bash.bashrc
-RUN chmod +x /root/autostart.sh
-RUN chmod +x /opt/TeamCity/bin/runAll.sh
+COPY configs/web-registration-off.sh /root/web-registration-off.sh
+RUN chmod +x /root/autostart.sh /root/web-registration-off.sh
+RUN chmod +x /opt/TeamCity/bin/runAll.sh /root/start.sh
 
 #aliases
 RUN alias ll='ls -la'
@@ -44,10 +46,7 @@ RUN chmod +x /root/.BuildServer/lib/jdbc/mysql-connector-java-5.1.35-bin.jar
 
 #Create database
 COPY configs/create_database.sh /root/
-COPY configs/start.sh /root/
 RUN chmod +x /root/create_database.sh
-RUN chmod +x /root/start.sh
-CMD [/root/create_database.sh]
 
 #open ports
 EXPOSE 8111 22
