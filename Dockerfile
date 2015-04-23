@@ -35,7 +35,8 @@ COPY configs/bash.bashrc /etc/bash.bashrc
 COPY configs/web-registration-off.sh /root/web-registration-off.sh
 COPY configs/web-registration-on.sh /root/web-registration-on.sh
 COPY configs/login-off.jsp /root/login-off.jsp
-RUN chmod +x /root/*.sh
+COPY configs/teamcity /etc/init.d/teamcity
+RUN chmod +x /root/*.sh /etc/init.d/teamcity
 RUN chmod +x /opt/TeamCity/bin/*.sh
 
 #aliases

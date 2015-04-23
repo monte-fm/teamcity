@@ -34,6 +34,15 @@ server {
 ```
 
 #Tips and trics!
+Added service teamcity with 2 parrameters ({start|stop}):
+```service teamcity start
+```
+```service teamcity stop
+```
+
+
+
+
 If you want disable user reginstration from web (security fix) - you need to run
 ```
 cd /root && ./web-registration-off.sh
@@ -45,5 +54,10 @@ cd /root && ./web-registration-on.sh
 ```
 
 Do not forget to restart TeamCity Server after security fix
-
+```
+service teamcity stop
+```
+```
+service teamcity start
+```
 
