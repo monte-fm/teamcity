@@ -35,9 +35,11 @@ server {
 
 #Tips and trics!
 Added service teamcity with 2 parrameters ({start|stop}):
-```service teamcity start
 ```
-```service teamcity stop
+service teamcity start
+```
+```
+service teamcity stop
 ```
 
 
