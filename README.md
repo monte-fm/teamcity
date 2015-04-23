@@ -38,5 +38,3 @@ If you want disable user reginstration from web (security fix) - you need to run
 ```
 cd /root && ./web-registration-off.sh
 ```
-
-#[bug tracker] (https://youtrack.jetbrains.com/issue/TW-39784)
