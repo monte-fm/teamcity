@@ -9,8 +9,7 @@ cd /root/
 rm /root/create_database.sh
 
 #starting TeamCity Server
-cd /opt/TeamCity/bin/
-./runAll.sh start
+service teamcity start 
 
 #remove database_creation on container start
 mv /root/start.sh /root/autostart.sh
