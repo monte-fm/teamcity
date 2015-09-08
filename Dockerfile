@@ -48,5 +48,10 @@ RUN chmod +x /root/.BuildServer/lib/jdbc/mysql-connector-java-5.1.35-bin.jar
 COPY configs/create_database.sh /root/
 RUN chmod +x /root/create_database.sh
 
+#Add colorful command line
+RUN echo "force_color_prompt=yes" >> .bashrc
+RUN echo "export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u\[\033[01;33m\]@\[\033[01;36m\]\h \[\033[01;33m\]\w \[\033[01;35m\]\$ \[\033[00m\]'" >> .bashrc
+
+
 #open ports
 EXPOSE 8111 22
