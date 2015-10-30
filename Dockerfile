@@ -24,7 +24,7 @@ RUN apt-get update
 RUN apt-get install -y default-jre default-jdk
 RUN apt-get install -y wget nano vim
 #RUN apt-get install -y nginx
-RUN wget http://download.jetbrains.com/teamcity/TeamCity-9.0.4.tar.gz
+RUN wget http://download.jetbrains.com/teamcity/TeamCity-9.1.3.tar.gz
 RUN tar -xvzf TeamCity-9.0.4.tar.gz
 RUN mv TeamCity /opt
 
