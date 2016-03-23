@@ -2,8 +2,8 @@ FROM      ubuntu:14.04.2
 MAINTAINER Olexander Kutsenko <olexander.kutsenko@gmail.com>
 
 # SSH service
-RUN apt-get install -y openssh-server openssh-client
 RUN apt-get update
+RUN apt-get install -y openssh-server openssh-client
 RUN apt-get install -y python-software-properties
 RUN sudo mkdir /var/run/sshd
 RUN echo 'root:root' | chpasswd
@@ -19,13 +19,23 @@ RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-s
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
 RUN sudo apt-get  install -y mysql-server mysql-client
 
+#Install Java 8
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+RUN add-apt-repository -y ppa:webupd8team/java
+RUN apt-get update
+# Accept license non-iteractive
+RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+RUN apt-get install -y oracle-java8-installer
+RUN apt-get install -y oracle-java8-set-default
+RUN echo "JAVA_HOME=/usr/lib/jvm/java-8-oracle" | sudo tee -a /etc/environment
+RUN export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+
 #install dependencies
 RUN apt-get update
-RUN apt-get install -y default-jre default-jdk
-RUN apt-get install -y wget nano vim
+RUN apt-get install -y wget nano vim mc
 #RUN apt-get install -y nginx
-RUN wget http://download.jetbrains.com/teamcity/TeamCity-9.1.3.tar.gz
-RUN tar -xvzf TeamCity-9.0.4.tar.gz
+RUN wget https://download.jetbrains.com/teamcity/TeamCity-9.1.6.tar.gz
+RUN tar -xvzf TeamCity-*
 RUN mv TeamCity /opt
 
 #Copying configs
