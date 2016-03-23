@@ -1,6 +1,11 @@
 FROM      ubuntu
 MAINTAINER Olexander Kutsenko <olexander.kutsenko@gmail.com>
 
+#Install Dependencies
+RUN apt-get update
+RUN apt-get install -y software-properties-common python-software-properties
+RUN apt-get install -y git git-core vim nano mc nginx tmux curl unzip wget
+
 # SSH service
 RUN apt-get update
 RUN apt-get install -y openssh-server openssh-client
@@ -30,10 +35,8 @@ RUN apt-get install -y oracle-java8-set-default
 RUN echo "JAVA_HOME=/usr/lib/jvm/java-8-oracle" | sudo tee -a /etc/environment
 RUN export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
-#install dependencies
+#install TeamCity
 RUN apt-get update
-RUN apt-get install -y wget nano vim mc
-#RUN apt-get install -y nginx
 RUN wget https://download.jetbrains.com/teamcity/TeamCity-9.1.6.tar.gz
 RUN tar -xvzf TeamCity-*
 RUN mv TeamCity /opt
