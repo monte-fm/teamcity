@@ -1,4 +1,4 @@
-FROM      ubuntu:14.04.2
+FROM      ubuntu
 MAINTAINER Olexander Kutsenko <olexander.kutsenko@gmail.com>
 
 # SSH service
@@ -39,29 +39,28 @@ RUN tar -xvzf TeamCity-*
 RUN mv TeamCity /opt
 
 #Copying configs
-COPY configs/start.sh /root/start.sh
 COPY configs/autostart.sh /root/autostart.sh
 COPY configs/bash.bashrc /etc/bash.bashrc
 COPY configs/teamcity /etc/init.d/teamcity
 RUN chmod +x /root/*.sh /etc/init.d/teamcity
 RUN chmod +x /opt/TeamCity/bin/*.sh
 
-#aliases
-RUN alias ll='ls -la'
-
 #MySQL driver
 RUN mkdir -p /root/.BuildServer/lib/jdbc
 COPY configs/mysql-connector-java-5.1.35-bin.jar /root/.BuildServer/lib/jdbc/
 RUN chmod +x /root/.BuildServer/lib/jdbc/mysql-connector-java-5.1.35-bin.jar
 
-#Create database
-COPY configs/create_database.sh /root/
-RUN chmod +x /root/create_database.sh
-
 #Add colorful command line
 RUN echo "force_color_prompt=yes" >> .bashrc
 RUN echo "export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u\[\033[01;33m\]@\[\033[01;36m\]\h \[\033[01;33m\]\w \[\033[01;35m\]\$ \[\033[00m\]'" >> .bashrc
 
+#etcKeeper
+RUN mkdir -p /root/etckeeper
+COPY configs/etckeeper.sh /root/etckeeper.sh
+COPY configs/files/etckeeper-hook.sh /root/etckeeper/etckeeper-hook.sh
+RUN chmod +x /root/etckeeper/*.sh
+RUN chmod +x /root/*.sh
+RUN /root/etckeeper.sh
 
 #open ports
-EXPOSE 8111 22
+EXPOSE 8111 22 80

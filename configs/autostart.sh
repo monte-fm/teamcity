@@ -4,13 +4,15 @@ service ssh start
 service mysql start
 
 #creating database
-cd /root/
-./create_database.sh
-rm /root/create_database.sh
+mysqladmin -uroot -proot create teamcity
 
-#starting TeamCity Server
-service teamcity start 
+echo "
+#!/bin/bash
 
-#remove database_creation on container start
-mv /root/start.sh /root/autostart.sh
+#Starting SSH and MySQL services
+service ssh start
+service mysql start
 
+#Starting TeamCity Server
+service teamcity start
+" > /root/autostart.sh
