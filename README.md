@@ -1,6 +1,6 @@
-# Create container  (TeamCity 9.1.6)
+# Create container  (TeamCity 9.1.7)
 ```
-docker run -i -t -d -p 8111:8111 -p 22:22 cristo/teamcity /bin/bash
+docker run -i -t -d -p 8111:8111 -p 1022:22 cristo/teamcity /bin/bash
 ```
 
 #MySQL
@@ -12,7 +12,7 @@ password: root
 ```
 #SSH
 ```
-ssh -p22 root@localhost
+ssh -p1022 root@localhost
 password: root
 ```
 #NGINX server config file for communicate with docker

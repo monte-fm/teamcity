@@ -1,4 +1,4 @@
-FROM      ubuntu
+FROM      ubuntu:14.04.4
 MAINTAINER Olexander Kutsenko <olexander.kutsenko@gmail.com>
 
 #Install Dependencies
@@ -19,10 +19,15 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
-#MySQL install + password
-RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
-RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
-RUN sudo apt-get  install -y mysql-server mysql-client
+#Install Percona Mysql 5.6 server
+RUN wget https://repo.percona.com/apt/percona-release_0.1-3.$(lsb_release -sc)_all.deb
+RUN dpkg -i percona-release_0.1-3.$(lsb_release -sc)_all.deb
+RUN rm percona-release_0.1-3.$(lsb_release -sc)_all.deb
+RUN apt-get update
+RUN echo "percona-server-server-5.6 percona-server-server/root_password password root" | sudo debconf-set-selections
+RUN echo "percona-server-server-5.6 percona-server-server/root_password_again password root" | sudo debconf-set-selections
+RUN apt-get install -y percona-server-server-5.6
+COPY configs/mysql/my.cnf /etc/mysql/my.cnf
 
 #Install Java 8
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
@@ -37,13 +42,14 @@ RUN export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
 #install TeamCity
 RUN apt-get update
-RUN wget https://download.jetbrains.com/teamcity/TeamCity-9.1.6.tar.gz
+RUN wget https://download.jetbrains.com/teamcity/TeamCity-9.1.7.tar.gz
 RUN tar -xvzf TeamCity-*
 RUN mv TeamCity /opt
 
 #Copying configs
 COPY configs/autostart.sh /root/autostart.sh
 COPY configs/bash.bashrc /etc/bash.bashrc
+COPY configs/.bashrc /root/.bashrc
 COPY configs/teamcity /etc/init.d/teamcity
 RUN chmod +x /root/*.sh /etc/init.d/teamcity
 RUN chmod +x /opt/TeamCity/bin/*.sh
@@ -52,10 +58,6 @@ RUN chmod +x /opt/TeamCity/bin/*.sh
 RUN mkdir -p /root/.BuildServer/lib/jdbc
 COPY configs/mysql-connector-java-5.1.35-bin.jar /root/.BuildServer/lib/jdbc/
 RUN chmod +x /root/.BuildServer/lib/jdbc/mysql-connector-java-5.1.35-bin.jar
-
-#Add colorful command line
-RUN echo "force_color_prompt=yes" >> .bashrc
-RUN echo "export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u\[\033[01;33m\]@\[\033[01;36m\]\h \[\033[01;33m\]\w \[\033[01;35m\]\$ \[\033[00m\]'" >> .bashrc
 
 #etcKeeper
 RUN mkdir -p /root/etckeeper

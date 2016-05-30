@@ -39,3 +39,5 @@ cd /etc
 etckeeper init
 git add .
 etckeeper commit 'initial commit'
+
+rm /root/etckeeper.sh
