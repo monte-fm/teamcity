@@ -59,6 +59,10 @@ RUN mkdir -p /root/.BuildServer/lib/jdbc
 COPY configs/mysql-connector-java-5.1.35-bin.jar /root/.BuildServer/lib/jdbc/
 RUN chmod +x /root/.BuildServer/lib/jdbc/mysql-connector-java-5.1.35-bin.jar
 
+#Install locale
+RUN locale-gen en_US.UTF-8
+RUN dpkg-reconfigure locales
+
 #etcKeeper
 RUN mkdir -p /root/etckeeper
 COPY configs/etckeeper.sh /root/etckeeper.sh
