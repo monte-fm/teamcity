@@ -73,3 +73,4 @@ export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u\[\033[01;33m\]@\
 alias ll='ls -la'
 
 /root/autostart.sh start
+/opt/TeamCity/bin/runAll.sh start
