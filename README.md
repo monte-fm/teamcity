@@ -1,4 +1,4 @@
-# Create container  (TeamCity 9.1.7)
+# Create container  (TeamCity 10.0.1)
 ```
 docker run -i -t -d -p 8111:8111 -p 1022:22 cristo/teamcity /bin/bash
 ```
