@@ -1,4 +1,4 @@
-# Create container  (TeamCity 10.0.1)
+# Create container  (TeamCity 10.0.2)
 ```
 docker run -i -t -d -p 8111:8111 -p 1022:22 cristo/teamcity /bin/bash
 ```
@@ -26,7 +26,7 @@ server {
 
                 location / {
                                 proxy_set_header Host $host;
-                                proxy_set_header X-Real_IP $remote_addr;
+                                proxy_set_header X-Real-IP $remote_addr;
                                 proxy_cache off;
                                 proxy_pass http://localhost:8111;
                         }
