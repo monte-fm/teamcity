@@ -42,7 +42,7 @@ RUN export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
 #install TeamCity
 RUN apt-get update
-RUN wget https://download.jetbrains.com/teamcity/TeamCity-10.0.1.tar.gz
+RUN wget https://download.jetbrains.com/teamcity/TeamCity-10.0.2.tar.gz
 RUN tar -xvzf TeamCity-*
 RUN mv TeamCity /opt
 
